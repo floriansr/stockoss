@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Stockoss</title>
+  <link rel="icon" type="image/png" href="https://www.pngfind.com/pngs/m/247-2473596_free-png-icon-chat-noir-halloween-dessin-transparent.png" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <style type="text/css">
+    .img-overlay-wrap {
+      position: relative;
+      display: inline-block; /* <= shrinks container to image size */
+    }
+    .img-overlay-wrap img { /* <= optional, for responsiveness */
+       display: block;
+       max-width: 100%;
+       height: auto;
+    }
+    .img-overlay-wrap svg {
+      position: absolute;
+      top: 0;
+    }
+    body{
+      background-color: #535557;
+    }
+    hr{
+      border-top: 1px solid gray;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="row">
+    <div class="col-12" style="display: flex;justify-content: center;align-items: center;">
+      <div class="align-self-center text-center bg-dark rounded text-white" style=" padding-left:15px;padding-right: 15px;display: inline-block;margin-left: auto;margin-right: auto;margin-top: 50px;margin-bottom:50px;">
+        <h1 class="text-center">
+          Bienvenue dans ce test Stockoss made
+        </h1>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+
+    <div class="col-4" style="padding: 30px;padding-top:0px">
+      <div class="sticky-top bg-dark text-white rounded text-center" style="padding:20px;">
+        <h2> Créer un objet </h2>
+
+
+      <%= render 'form-object', article: @article %>
+
+
+      </div>
+    </div>
+
+    <div class="list-group col-8" id="list_item">
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+
+    <div class="col-4" style="padding: 30px;padding-top:0px">
+      <div class="sticky-top bg-dark text-white rounded text-center" style="padding:20px;">
+        <h2> Créer une collecte </h2>
+        <form>
+          <div class="form-group">
+            <label for="name">Nom</label>
+            <input type="text" class="form-control" id="name_delivery" placeholder="Ferme">
+          </div>
+          <button type="submit" class="btn btn-primary" id="create_delivery">Créer</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="list-group col-8" id="list_deliveries">
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+
+    <div class="col-4" style="padding: 30px;padding-top:0px">
+      <div class="sticky-top bg-dark text-white rounded text-center" style="padding:20px;">
+        <h2> Ajouter un objet </h2>
+        <form>
+          <div class="form-group">
+            <label for="item_id">ID</label>
+            <input type="number" class="form-control" id="item_id">
+          </div>
+          <button type="submit" class="btn btn-primary" id="link_item">Ajouter</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="list-group col-8 text-center" id="list_item_collect">
+
+      <h2 class="bg-dark rounded text-white text_center"  style="margin-right: 10px;"> Liste des objets dans la collecte : <span id="delivery_name"></span></h2>
+
+    </div>
+  </div>
+  <hr>
+
+  <div class="row">
+    <div class="col-12" style="display: flex;justify-content: center;align-items: center;">
+      <div class="align-self-center text-center bg-dark rounded text-white" style=" padding-left:15px;padding-right: 15px;display: inline-block;margin-left: auto;margin-right: auto;margin-top: 10px;margin-bottom:10px;">
+        <h1 class="text-center">
+          Parcours de l'entrepôt
+        </h1>
+      </div>
+    </div>
+    <div class="col-9" style="padding-top:20px;">
+
+      <div class="img-overlay-wrap d-flex justify-content-center" style="text-align:center;">
+
+        <img src="https://lh3.googleusercontent.com/2HmW6-9_gRYuOUnpiEq9kPMlc78Vb5ept166MN9KGpu49w7Q4POK5B6Zz4GAoKDNSsksn9RqkYoSHkAfPhdJHFS25r6UqvJkomONWbuoqpaoBeNrWuZNn_r-0tW9h6kEBeowYVUpFzYN_HI3qxsfnrd0bwjry4zYWC_6gb327z7-bLKfOcGkcYySkk39vI4HYZoX_Ky-UHnudAzKTXpZ-18o2qS_5Rmo-wLEKSykk_uuhjZBKFNteWPqpmzlew_w3Arzi_3j4CKnJZDUHJboz4Y1sQxxiMwxn826kpaxQmLPkdXmixgqo8SYkRrgY9KtHpeHFQR7lzf0oR5g8l6-xK1FPE4JwNczX2EoHqaFHwcq_3liaqIoojplFKFME7asmAuegNQVCRaIzpyPDwkygk59sHH6giZoSWIyenvOJN1pnvnCYaX5rJPXrRI_dadYoJfkABXBjgzRnKta9lu_-sdsOTnX_o5-HOTWD4QuAgiGDSW-cCsFvJ0wr_dLGrmc05lYPx7TfQKJBtjkwOEcONl4iGnC2KxIIpswJsoJ9vZDNWpJ-FJH0HCmpO_OOjV0qsq889OKuj4OYbASvIc0xAE2oVIXM0XvqaUv49gQv98yVrc45lo0synRhc-Epp_aOszJShI1WXxFoKXdyvbWQ953nhdvn4-uCLATVXPom4aM3VggCyABLVJNPN2vMoq-m1Aj5ANsE5JPs8sRwr3SrnsDl82XdKfMT2K5VPmw70bFOw=w800-h530-no" class="mx-auto d-block">
+        <svg viewBox="0 0 800 530" height="530" width="800">
+          <polyline id="line" stroke="purple" stroke-linejoin="round" stroke-width="4" fill="none" points=""/>
+        </svg>
+
+      </div>
+    </div>
+    <div class="col-3" style="padding-top:20px;">
+      <div class="align-self-center text-center bg-dark rounded text-white" style="margin-right:10px;position: absolute;top: 50%;margin-right: 10px;padding-left: 10px;padding-right: 10px;">
+        <h2 style="margin-bottom:0px">Score : <span id="score"></span> rxk²</h2>
+        <p style="font-size:11px; ">ps: moins c'est mieux !</p>
+      </div>
+    </div>
+  </div>
+  <hr>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>
+<script type="text/javascript" charset="utf-8">
+
+  var old_x = 385;
+  var old_y = 155;
+  var res = 0;
+
+  function to_svg(place) {
+    x = 91 + ((place[0].charCodeAt(0) - 'A'.charCodeAt(0)) * 117);
+    if (place[0] == 'E'){
+      x -= 27;
+    }
+    y = 182 + ((place[1].charCodeAt(0) - '0'.charCodeAt(0)) * 49);
+    str = " " + x + "," + y;
+    res += Math.sqrt(((old_x - x) * (old_x - x)) + ((old_y - y) * (old_y - y)));
+    old_x = x;
+    old_y = y;
+    return str;
+  }
+
+  function appendList(name, place, id, list) {
+
+    const row = document.createElement("div");
+
+    row.setAttribute("class", "list-group-item flex-column align-items-start bg-dark text-white collapsed");
+    row.setAttribute("style", "margin-right:10px;");
+    html = `<div class="d-flex w-100 justify-content-between"><h5 class="mb-1">`
+    html += name;
+    html +=`</h5><small>`
+    html += id;
+    html += `</small></div><p class="mb-1">`
+    html += place;
+    html += `</p>`
+    row.innerHTML = html;
+    list.appendChild(row);
+  }
+
+  function appendListWithlink(name, place, id, list) {
+
+    const row = document.createElement("a");
+
+    row.setAttribute("class", "list-group-item flex-column align-items-start bg-dark text-white collapsed");
+    row.setAttribute("style", "margin-right:10px;");
+    row.setAttribute("href", "stockoss_test.html?delivery_id=" + id);
+    html = `<div class="d-flex w-100 justify-content-between"><h5 class="mb-1">`
+    html += name;
+    html +=`</h5><small>`
+    html += id;
+    html += `</small></div><p class="mb-1">`
+    html += place;
+    html += `</p>`
+    row.innerHTML = html;
+    list.appendChild(row);
+  }
+
+  function getUrlVars() {
+      var vars = {};
+      var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+          vars[key] = value;
+      });
+      return vars;
+  }
+  var delivery_id = getUrlVars()["delivery_id"];
+
+  document.getElementById("create_item").addEventListener("click", function(event){
+    event.preventDefault();
+    var name = document.getElementById("name_item").value;
+    var place = document.getElementById("place_item").value;
+    $.post("http://localhost:3000/items", {"item":{"name":name, "place":place}}, function(result){
+      location.reload();
+    });
+  });
+  document.getElementById("create_delivery").addEventListener("click", function(event){
+    event.preventDefault();
+    var name = document.getElementById("name_delivery").value;
+    $.post("http://localhost:3000/deliveries", {"delivery":{"name":name}}, function(result){
+      location.reload();
+    });
+  });
+  document.getElementById("link_item").addEventListener("click", function(event){
+    event.preventDefault();
+    var item_id = document.getElementById("item_id").value;
+    $.post("http://localhost:3000/delivery_items", {"delivery_item":{"item_id":item_id, "delivery_id":delivery_id}}, function(result){
+      location.reload();
+    });
+  });
+  $.ajax({url: "http://localhost:3000/items", success: function(result){
+    for (let i = 0; i < result.length; i++) {
+      appendList(result[i].name, result[i].place, result[i].id, document.getElementById("list_item"));
+    }
+  }});
+  $.ajax({url: "http://localhost:3000/deliveries", success: function(result){
+    for (let i = 0; i < result.length; i++) {
+      appendListWithlink(result[i].name, result[i].quantity_ref, result[i].id, document.getElementById("list_deliveries"));
+    }
+  }});
+
+  if (delivery_id != undefined){
+    $.ajax({url: ("http://localhost:3000/deliveries/" + delivery_id), success: function(result){
+      document.getElementById("delivery_name").innerHTML = result.name;
+    }});
+    $.ajax({url: ("http://localhost:3000/deliveries/" + delivery_id +  "/items"), success: function(result){
+      for (let i = 0; i < result.length; i++) {
+        appendList(result[i].name, result[i].place, result[i].id, document.getElementById("list_item"));
+      }
+    }});
+    $.ajax({url: ("http://localhost:3000/order_picker/deliveries/" + delivery_id), success: function(result){
+      str = "385,155";
+      result.data.forEach(elem => str += to_svg(elem));
+      str += " 385,155";
+      document.getElementById("score").innerHTML = Math.round(res);
+      document.getElementById("line").setAttribute("points", str);
+    }});
+  }
+</script>
